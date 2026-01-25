@@ -2,10 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const path = require('path');
 const connectDB = require('./config/database');
 require('dotenv').config();
 const app = express();
+const fileURLToPath = require('url');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -20,31 +22,45 @@ const uploadRoutes = require('./routes/upload');
 // Connect to database
 connectDB();
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "*",
+  credentials: true,
+}));
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+//   });
+// }
+
 // Security middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
-app.use(cors({
-  origin: function(origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'http://127.0.0.1:3000',
-      'http://127.0.0.1:5173',
-      'http://127.0.0.1:5174'
-    ];
-    if (process.env.NODE_ENV === 'production') {
-      allowedOrigins.push('https://your-frontend-domain.com');
-    }
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
+
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     const allowedOrigins = [
+//       'http://localhost:3000',
+//       'http://localhost:5173',
+//       'http://localhost:5174',
+//       'http://127.0.0.1:3000',
+//       'http://127.0.0.1:5173',
+//       'http://127.0.0.1:5174'
+//     ];
+//     if (process.env.NODE_ENV === 'production') {
+//       allowedOrigins.push('https://your-frontend-domain.com');
+//     }
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true
+// }));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -58,6 +74,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
+const path = require('path');
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Routes
@@ -70,39 +87,13 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', uploadRoutes);
 
-// Production - serve frontend
 if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
   });
 }
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'CarZone API is running',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : {}
-  });
-});
-
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
-  });
-});
 
 const PORT = process.env.PORT || 5000;
 
