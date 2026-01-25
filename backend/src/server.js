@@ -21,9 +21,9 @@ const uploadRoutes = require('./routes/upload');
 // Connect to database
 connectDB();
 
-// CORS
+// CORS - Allow same origin since frontend and backend are served from same URL
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
+  origin: true, // Allow same origin
   credentials: true,
 }));
 
@@ -56,14 +56,17 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', uploadRoutes);
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
-  });
-}
+// Handle React routing - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/') || req.path.startsWith('/uploads/')) {
+    return res.status(404).json({ message: 'API endpoint not found' });
+  }
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
