@@ -46,12 +46,16 @@ export default function CarsModal({ isOpen, onClose }: CarsModalProps) {
     try {
       setLoading(true)
       const response = await carAPI.getCars({ limit: 50, page: 1 })
-      if (response.data && Array.isArray(response.data)) {
-        setCars(response.data)
+      console.log('CarsModal API response:', response)
+      if (response.data?.success && response.data.data) {
+        setCars(response.data.data)
+      } else {
+        setCars([])
       }
     } catch (error) {
       console.error('Error fetching cars:', error)
       toast.error('Failed to load cars')
+      setCars([])
     } finally {
       setLoading(false)
     }
