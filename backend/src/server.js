@@ -4,10 +4,9 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/database');
 require('dotenv').config();
+const path = require('path');
+
 const app = express();
-const fileURLToPath = require('url');
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -22,59 +21,29 @@ const uploadRoutes = require('./routes/upload');
 // Connect to database
 connectDB();
 
+// CORS
 app.use(cors({
   origin: process.env.FRONTEND_URL || "*",
   credentials: true,
 }));
-
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, '../../frontend/dist')));
-
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
-//   });
-// }
 
 // Security middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     const allowedOrigins = [
-//       'http://localhost:3000',
-//       'http://localhost:5173',
-//       'http://localhost:5174',
-//       'http://127.0.0.1:3000',
-//       'http://127.0.0.1:5173',
-//       'http://127.0.0.1:5174'
-//     ];
-//     if (process.env.NODE_ENV === 'production') {
-//       allowedOrigins.push('https://your-frontend-domain.com');
-//     }
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true
-// }));
-
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
 app.use(limiter);
 
-// Body parser middleware
+// Body parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
-const path = require('path');
+// Serve uploads
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Routes
@@ -87,6 +56,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', uploadRoutes);
 
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
@@ -95,8 +65,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Start server
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log(`🚗 CarZone server running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
