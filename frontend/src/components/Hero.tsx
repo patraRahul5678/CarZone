@@ -58,7 +58,7 @@ export default function Hero() {
                 
                 <div className="mt-12 md:mt-16 text-center">
                     <img 
-                        src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        src="../download (8).jpg" 
                         alt="Car" 
                         className="mx-auto max-w-sm md:max-w-md w-full h-40 md:h-48 object-cover rounded card-shadow"
                     />
