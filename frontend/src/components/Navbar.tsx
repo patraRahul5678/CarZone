@@ -82,44 +82,41 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 w-full z-50 bg-white dark:bg-black border-b border-gray-100 dark:border-gray-900 transition-colors duration-200">
-            <div className="px-4 sm:px-6 md:px-8 lg:px-16 py-3 md:py-4">
+            <div className="px-4 sm:px-6 md:px-8 lg:px-16">
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-2 md:space-x-3">
-                        <Link to="/" className="flex items-center space-x-2 md:space-x-3">
-                            <img className='w-12 h-12 md:w-16 md:h-16' src="../image.png" alt="CarZone" />
-                        </Link>
-                    </div>
-                    
+
+                    <Link to="/">
+                        <img className='w-18 h-18 md:w-30 md:h-29' src="../gg.png" alt="CarZone" />
+                    </Link>
+
                     {/* Desktop Menu (lg and up) */}
                     <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-                        <button 
+                        <button
                             onClick={handleRentClick}
-                            className={`font-medium transition-all duration-200 px-3 py-1 rounded ${
-                                activeButton === 'rent' 
-                                    ? 'bg-black dark:bg-white text-white dark:text-black' 
+                            className={`font-medium transition-all duration-200 px-3 py-1 rounded ${activeButton === 'rent'
+                                    ? 'bg-black dark:bg-white text-white dark:text-black'
                                     : 'text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300'
-                            }`}
+                                }`}
                         >
                             Rent
                         </button>
-                        <button 
+                        <button
                             onClick={handleListClick}
-                            className={`font-medium transition-all duration-200 px-3 py-1 rounded ${
-                                activeButton === 'list' 
-                                    ? 'bg-black dark:bg-white text-white dark:text-black' 
+                            className={`font-medium transition-all duration-200 px-3 py-1 rounded ${activeButton === 'list'
+                                    ? 'bg-black dark:bg-white text-white dark:text-black'
                                     : 'text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300'
-                            }`}
+                                }`}
                         >
                             List
                         </button>
-                        <Link 
-                            to="/about" 
+                        <Link
+                            to="/about"
                             className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 font-medium transition-colors duration-200"
                         >
                             About
                         </Link>
-                        
-                        <button 
+
+                        <button
                             onClick={handleToggle}
                             className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-200"
                             aria-label="Toggle theme"
@@ -127,23 +124,23 @@ export default function Navbar() {
                         >
                             <ThemeIcon />
                         </button>
-                        
+
                         {isAdmin ? (
-                            <Link 
-                                to="/admin" 
+                            <Link
+                                to="/admin"
                                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 rounded font-medium transition-all duration-200"
                             >
                                 Admin
                             </Link>
                         ) : isLoggedIn ? (
-                            <button 
+                            <button
                                 onClick={handleLogout}
                                 className="px-4 md:px-6 py-2 rounded font-medium transition-all duration-200 text-red-700 hover:text-red-800"
                             >
                                 Logout
                             </button>
                         ) : (
-                            <button 
+                            <button
                                 onClick={() => setShowLoginModal(true)}
                                 className="px-4 md:px-6 py-2 rounded font-medium transition-all duration-200 text-red-700"
                             >
@@ -151,10 +148,10 @@ export default function Navbar() {
                             </button>
                         )}
                     </div>
-                    
+
                     {/* Mobile Menu Button (md and below) */}
                     <div className="lg:hidden flex items-center gap-2">
-                        <button 
+                        <button
                             onClick={handleToggle}
                             className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-200"
                             aria-label="Toggle theme"
@@ -162,8 +159,8 @@ export default function Navbar() {
                         >
                             <ThemeIcon />
                         </button>
-                        
-                        <button 
+
+                        <button
                             onClick={toggleMobileMenu}
                             className="p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded transition-colors duration-200"
                             aria-label="Toggle menu"
@@ -182,48 +179,46 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-            
+
             {/* Mobile Dropdown Menu */}
             {isMobileMenuOpen && (
                 <div className="lg:hidden bg-white dark:bg-black border-t border-gray-100 dark:border-gray-900">
                     <div className="px-4 sm:px-6 md:px-8 py-4 space-y-3">
-                        <button 
+                        <button
                             onClick={handleRentClick}
-                            className={`block w-full text-left font-medium py-2 transition-all duration-200 px-3 rounded ${
-                                activeButton === 'rent' 
-                                    ? 'bg-black dark:bg-white text-white dark:text-black' 
+                            className={`block w-full text-left font-medium py-2 transition-all duration-200 px-3 rounded ${activeButton === 'rent'
+                                    ? 'bg-black dark:bg-white text-white dark:text-black'
                                     : 'text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300'
-                            }`}
+                                }`}
                         >
                             Rent
                         </button>
-                        <button 
+                        <button
                             onClick={handleListClick}
-                            className={`block w-full text-left font-medium py-2 transition-all duration-200 px-3 rounded ${
-                                activeButton === 'list' 
-                                    ? 'bg-black dark:bg-white text-white dark:text-black' 
+                            className={`block w-full text-left font-medium py-2 transition-all duration-200 px-3 rounded ${activeButton === 'list'
+                                    ? 'bg-black dark:bg-white text-white dark:text-black'
                                     : 'text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300'
-                            }`}
+                                }`}
                         >
                             List
                         </button>
-                        <Link 
-                            to="/about" 
+                        <Link
+                            to="/about"
                             className="block text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 font-medium py-2 transition-colors duration-200"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             About
                         </Link>
                         {isAdmin ? (
-                            <Link 
-                                to="/admin" 
+                            <Link
+                                to="/admin"
                                 className="block w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded font-medium transition-all duration-200 text-center"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Admin Dashboard
                             </Link>
                         ) : isLoggedIn ? (
-                            <button 
+                            <button
                                 onClick={() => {
                                     handleLogout()
                                     setIsMobileMenuOpen(false)
@@ -233,7 +228,7 @@ export default function Navbar() {
                                 Logout
                             </button>
                         ) : (
-                            <button 
+                            <button
                                 onClick={() => {
                                     setShowLoginModal(true)
                                     setIsMobileMenuOpen(false)
@@ -246,18 +241,18 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
-            
+
             {/* Modals */}
-            <CarsModal 
-                isOpen={showCarsModal} 
-                onClose={handleCloseModals} 
+            <CarsModal
+                isOpen={showCarsModal}
+                onClose={handleCloseModals}
             />
-            
-            <ListCarForm 
-                isOpen={showListCarForm} 
-                onClose={handleCloseModals} 
+
+            <ListCarForm
+                isOpen={showListCarForm}
+                onClose={handleCloseModals}
             />
-            
+
             <LoginModal
                 isOpen={showLoginModal}
                 onClose={handleCloseModals}
