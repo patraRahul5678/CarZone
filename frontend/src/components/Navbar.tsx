@@ -81,7 +81,7 @@ export default function Navbar() {
     )
 
     return (
-        <nav className="fixed top-0 w-full z-50 bg-white dark:bg-black border-b border-gray-100 dark:border-gray-900 transition-colors duration-200">
+        <nav className="sticky top-0 w-full z-50 bg-white dark:bg-black border-b border-gray-100 dark:border-gray-900 transition-colors duration-200">
             <div className="px-4 sm:px-6 md:px-8 lg:px-16">
                 <div className="flex justify-between items-center">
 
