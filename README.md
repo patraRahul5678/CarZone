@@ -1,87 +1,228 @@
 # 🚗 CarZone Rentals
 
 <p align="center">
-  <b>Modern Car Rental Platform inspired by Uber's clean and intuitive design.</b><br/>
-  Rent vehicles seamlessly, list your own cars, and enjoy a premium booking experience with support for both Dark and Light themes.
+  <b>An Uber-inspired full-stack car rental marketplace built with modern web technologies.</b>
+</p>
+
+<p align="center">
+  Rent cars, list your own vehicles, and experience a seamless booking journey powered by role-based access control and a modern, responsive user experience.
 </p>
 
 ---
 
 ## 🌐 Live Demo
 
-👉 **[View Live Website](https://carzone-ype5.onrender.com)**
+👉 **[View Live Website](https://your-deployed-url.com)**
 
-> Replace the above URL with your deployed application URL.
+> Replace the above URL with your deployed application link.
 
 ---
 
 ## 📖 About the Project
 
-CarZone Rentals is a full-stack car rental platform designed to simplify the vehicle booking experience. Inspired by Uber's modern user experience, the platform enables users to browse available cars, book rentals, complete secure mock payments, and manage their reservations through an intuitive interface.
+CarZone Rentals is a modern car rental marketplace inspired by Uber's clean and intuitive user experience.
 
-The application emphasizes usability, responsiveness, and scalability while providing a production-like booking workflow.
+The platform enables users to browse and rent vehicles, while also allowing any registered user to earn by listing their own cars. To maintain quality and trust, every submitted vehicle undergoes an admin approval process before becoming publicly available.
+
+The project demonstrates production-grade concepts such as authentication, role-based access control, booking systems, approval workflows, dashboard analytics, theme switching, and payment processing.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
 ### 🚘 Vehicle Rentals
 
 * Browse available rental vehicles
-* Filter by category and pricing
+* Search by pickup and return locations
+* Select rental dates and times
+* Filter vehicles by category and pricing
 * View detailed vehicle information
-* Real-time availability status
-* Book cars for specific dates and times
+* Book vehicles instantly
+* View booking summaries
+* Cancel upcoming reservations
+* Access booking history
 
-### 💳 Mock Payment Integration
+---
 
-* Simulated checkout experience
-* Booking summary before payment
-* Success and failure payment states
-* Order confirmation page
-* Transaction history (mock)
+### 🚙 List Your Vehicle
 
-### 🌗 Theme Support
+Any registered user can list their vehicle on the platform.
+
+Users can:
+
+* Submit vehicles for approval
+* Upload vehicle images
+* Add specifications and descriptions
+* Set rental pricing
+* Edit pending listings
+* Track listing status
+* Resubmit rejected listings
+
+---
+
+## 🔐 Vehicle Approval Workflow
+
+To maintain quality and authenticity, all vehicle listings are reviewed by administrators.
+
+```text
+User Registers/Login
+        ↓
+Lists a Vehicle
+        ↓
+Status: Pending Approval
+        ↓
+Admin Reviews Listing
+      ↙            ↘
+Approved         Rejected
+    ↓                ↓
+Visible to      User Receives
+Customers        Feedback
+```
+
+> Vehicles become publicly visible only after administrator approval.
+
+---
+
+## 🛡️ Admin Dashboard
+
+CarZone Rentals includes a dedicated Admin Dashboard for complete platform management.
+
+### Vehicle Management
+
+Admins can:
+
+* View all submitted vehicles
+* Approve vehicle listings
+* Reject vehicle listings
+* Suspend listings
+* Remove fraudulent vehicles
+* View detailed vehicle information
+
+---
+
+### 👥 User Management
+
+Admins can:
+
+* View all registered users
+* Monitor user activities
+* Suspend accounts
+* Reactivate accounts
+* Remove malicious users
+
+---
+
+### 📅 Booking Management
+
+Admins can:
+
+* View all bookings
+* Monitor active rentals
+* Track completed bookings
+* Cancel suspicious reservations
+* Resolve booking disputes
+
+---
+
+### 💳 Payment Monitoring
+
+Admins can:
+
+* View transaction records
+* Monitor payment statuses
+* Track revenue statistics
+* Export reports
+
+---
+
+### 📈 Dashboard Analytics
+
+Admins can monitor:
+
+* Total Users
+* Total Vehicles Listed
+* Pending Approvals
+* Approved Listings
+* Active Rentals
+* Completed Bookings
+* Revenue Overview
+* Platform Growth Metrics
+
+---
+
+## 🔐 Unified Authentication System
+
+CarZone Rentals uses a single authentication system for everyone.
+
+Users sign in through the same login page and are automatically redirected based on their role.
+
+### Authentication Flow
+
+```text
+Login/Register
+      ↓
+Verify Credentials
+      ↓
+Check User Role
+      ↓
+Redirect to Appropriate Dashboard
+```
+
+### Role-Based Access
+
+| Role          | Access                     |
+| ------------- | -------------------------- |
+| User          | Browse and rent vehicles   |
+| Vehicle Owner | Manage submitted listings  |
+| Admin         | Manage the entire platform |
+
+> Users automatically gain vehicle management capabilities once they submit a listing.
+
+---
+
+## 💳 Mock Payment Integration
+
+The platform includes a simulated payment system to provide a realistic checkout experience.
+
+### Supported Payment Methods
+
+* Credit Cards
+* Debit Cards
+* UPI
+* Wallet Payments
+
+### Test Payment Credentials
+
+```text
+Card Number: 4242 4242 4242 4242
+Expiry Date: 12/30
+CVV: 123
+OTP: 123456
+```
+
+> No real payments are processed. Transactions are simulated for demonstration and portfolio purposes.
+
+---
+
+## 🌗 Theme Support
 
 * Dark Theme
 * Light Theme
-* Persistent theme preference
-* Smooth theme transitions
+* Persistent Theme Preferences
+* Smooth Theme Switching
 
-### 👥 User Features
+---
 
-* User Registration & Login
-* JWT Authentication
-* Protected Routes
-* Profile Management
-* Booking History
-* Cancel Upcoming Reservations
-
-### 🚙 Car Listing
-
-* List your own vehicle
-* Upload car images
-* Set rental pricing
-* Define vehicle specifications
-* Manage listed vehicles
-
-### 🔍 Smart Search
-
-* Pickup & Return Locations
-* Pickup Date & Time
-* Vehicle Categories
-* Pricing Filters
-* Instant Availability Search
-
-### 📱 User Experience
+## 📱 User Experience Features
 
 * Fully Responsive Design
 * Mobile-First Approach
-* Modern Uber-inspired UI
+* Uber-inspired User Interface
 * Smooth Animations
 * Toast Notifications
-* Loading Skeletons
-* Error Handling
+* Skeleton Loaders
+* Robust Error Handling
+* Fast Performance
 
 ---
 
@@ -95,8 +236,11 @@ The application emphasizes usability, responsiveness, and scalability while prov
 | Vite            | Development & Build Tool |
 | Tailwind CSS    | Styling                  |
 | React Router    | Routing                  |
+| TanStack Query  | Server State Management  |
 | Framer Motion   | Animations               |
 | React Hook Form | Form Handling            |
+
+---
 
 ### Backend
 
@@ -107,7 +251,9 @@ The application emphasizes usability, responsiveness, and scalability while prov
 | MongoDB    | Database            |
 | Mongoose   | ODM                 |
 | JWT        | Authentication      |
-| bcrypt     | Password Hashing    |
+| bcrypt     | Password Security   |
+
+---
 
 ### Additional Services
 
@@ -118,77 +264,31 @@ The application emphasizes usability, responsiveness, and scalability while prov
 
 ---
 
-## 🎯 Core Functionalities
-
-### Customer Flow
-
-1. Register/Login
-2. Search for available cars
-3. Select rental dates
-4. View booking summary
-5. Complete mock payment
-6. Receive booking confirmation
-7. Manage reservations
-
-### Host Flow
-
-1. Create an account
-2. List a vehicle
-3. Upload images
-4. Set pricing
-5. Track bookings
-6. Manage availability
-
----
-
-## 💳 Mock Payment Flow
-
-This project includes a simulated payment gateway for demonstration purposes.
-
-### Supported Mock Methods
-
-* Credit Card
-* Debit Card
-* UPI
-* Wallet Payments
-
-### Test Payment Details
-
-```text
-Card Number: 4242 4242 4242 4242
-Expiry Date: 12/30
-CVV: 123
-OTP: 123456
-```
-
-> No real transactions are processed. Payments are simulated for educational and portfolio purposes.
-
----
-
 ## 📂 Project Structure
 
 ```text
 carzone-rentals/
 │
-├── backend/
+├── backend/src/
 │   ├── controllers/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
+│   ├── services/
 │   ├── utils/
 │   └── server.js
 │
 ├── frontend/
+│   ├── public/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
+│   │   ├── layouts/
 │   │   ├── hooks/
 │   │   ├── services/
 │   │   ├── store/
-│   │   ├── layouts/
+│   │   ├── utils/
 │   │   └── App.jsx
-│   │
-│   ├── public/
 │   └── vite.config.js
 │
 └── README.md
@@ -248,16 +348,17 @@ VITE_API_URL=http://localhost:5000
 
 ## 🚀 Future Enhancements
 
-* Real Payment Gateway Integration (Stripe/Razorpay)
-* Email Notifications
-* Driver Booking Option
-* Admin Dashboard
-* Vehicle Reviews & Ratings
+* Stripe/Razorpay Integration
 * Google Maps Integration
-* Wishlist Functionality
-* Coupons & Discounts
+* Driver Booking Services
+* Reviews and Ratings
+* Coupons and Discounts
+* Email Notifications
 * Push Notifications
-* AI-based Vehicle Recommendations
+* AI-Based Vehicle Recommendations
+* Advanced Revenue Reports
+* Vehicle Verification Documents
+* Fraud Detection System
 
 ---
 
@@ -266,12 +367,16 @@ VITE_API_URL=http://localhost:5000
 This project helped strengthen my understanding of:
 
 * Building scalable MERN applications
-* Implementing authentication and protected routes
-* Designing complete booking workflows
-* Managing complex application state
-* Simulating production-grade payment experiences
-* Creating theme systems using React and Tailwind CSS
-* Building responsive and accessible user interfaces
+* JWT Authentication
+* Role-Based Access Control (RBAC)
+* Admin Dashboard Development
+* Approval Workflows
+* Marketplace Architectures
+* Booking Management Systems
+* Payment Flows
+* State Management
+* Responsive UI Development
+* Production-Ready Application Design
 
 ---
 
@@ -280,7 +385,6 @@ This project helped strengthen my understanding of:
 **Rahul Patra**
 
 * GitHub: https://github.com/patraRahul5678
-
 
 ---
 
