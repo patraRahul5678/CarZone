@@ -1,4 +1,4 @@
-# 🚗 CarZone Rentals
+<p align="center"># 🚗 CarZone Rentals</p>
 
 <p align="center">
   <b>An Uber-inspired full-stack car rental marketplace built with modern web technologies.</b>
